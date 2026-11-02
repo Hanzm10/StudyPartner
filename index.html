@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyPartner</title>
+    <script>
+      // Apply a saved theme before first paint so dark mode doesn't flash light.
+      try {
+        var t = localStorage.getItem('studypartner:theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

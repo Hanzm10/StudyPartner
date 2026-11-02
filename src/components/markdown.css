@@ -1,0 +1,146 @@
+.md-body {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.md-body > *:first-child {
+  margin-top: 0;
+}
+
+.md-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.md-body p {
+  margin: 0 0 0.65rem;
+}
+
+.md-body h1,
+.md-body h2,
+.md-body h3,
+.md-body h4 {
+  margin: 1rem 0 0.45rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.md-body h1 {
+  font-size: 1.2rem;
+}
+
+.md-body h2 {
+  font-size: 1.1rem;
+}
+
+.md-body h3 {
+  font-size: 1.02rem;
+}
+
+.md-body h4 {
+  font-size: 0.98rem;
+}
+
+.md-body strong {
+  font-weight: 650;
+}
+
+.md-body em {
+  font-style: italic;
+}
+
+.md-body ul,
+.md-body ol {
+  margin: 0 0 0.65rem;
+  padding-left: 1.35rem;
+}
+
+.md-body li {
+  margin: 0.2rem 0;
+}
+
+.md-body li > ul,
+.md-body li > ol {
+  margin: 0.15rem 0 0.25rem;
+}
+
+.md-body blockquote {
+  margin: 0 0 0.65rem;
+  padding: 0.15rem 0 0.15rem 0.75rem;
+  border-left: 3px solid var(--border-strong);
+  color: var(--text-muted);
+}
+
+.md-body code {
+  font-family: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
+  font-size: 0.86em;
+  background: var(--code-inline-bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+.md-body pre {
+  margin: 0 0 0.65rem;
+  padding: 0.7rem 0.8rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: var(--code-bg);
+  color: var(--code-fg);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.md-body pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.md-body a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.md-body hr {
+  margin: 0.85rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.md-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 0.65rem;
+  font-size: 0.88rem;
+}
+
+.md-body th,
+.md-body td {
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+}
+
+.md-body th {
+  background: var(--surface-alt);
+  font-weight: 600;
+}
+
+.md-quiz-note {
+  margin: 0.5rem 0 0;
+  padding: 0.4rem 0.55rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  border-radius: 6px;
+  border: 1px dashed var(--border-strong);
+}
+
+.md-body > .md-quiz-note:first-child {
+  margin-top: 0;
+}

@@ -1,0 +1,157 @@
+.settings-page {
+  max-width: 28rem;
+}
+
+.settings-header {
+  margin-bottom: 1.5rem;
+}
+
+.settings-privacy {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.settings-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.settings-form input,
+.settings-form select {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.settings-form input:focus,
+.settings-form select:focus {
+  outline: 2px solid var(--border-strong);
+  outline-offset: 1px;
+}
+
+.settings-key-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.settings-key-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-toggle {
+  flex-shrink: 0;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--surface-sunken);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.settings-toggle:hover {
+  background: var(--surface-sunken);
+}
+
+.settings-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.settings-preset {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.settings-preset:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.settings-preset.is-active {
+  border-color: var(--text-subtle);
+  background: var(--surface-sunken);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.settings-advanced {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface-alt);
+}
+
+.settings-advanced summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.settings-advanced[open] summary {
+  margin-bottom: 0.65rem;
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.settings-save {
+  padding: 0.55rem 1.15rem;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.settings-save:hover {
+  background: var(--primary-hover);
+}
+
+.settings-saved {
+  font-size: 0.9rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.settings-error {
+  font-size: 0.9rem;
+  color: var(--danger);
+}

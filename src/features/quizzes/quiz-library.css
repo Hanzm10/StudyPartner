@@ -1,0 +1,131 @@
+.quiz-library {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.quiz-library-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.quiz-library-empty {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.quiz-library-empty a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.quiz-library-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quiz-library-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.quiz-library-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.quiz-library-item-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.quiz-library-item-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.quiz-library-meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.quiz-library-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.quiz-library-actions a,
+.quiz-library-actions button {
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.quiz-library-start {
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.quiz-library-retake {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.quiz-library-attempts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.quiz-library-attempts-label {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.quiz-library-attempts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.quiz-library-attempts a {
+  font-size: 0.9rem;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.quiz-library-in-progress {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+}
+
+.quiz-library-delete {
+  margin-left: auto;
+  color: var(--danger);
+}

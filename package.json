@@ -1,0 +1,35 @@
+{
+  "name": "studypartner",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "start": "tsx server/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.18.4",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.6",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^30.1.1",
+    "oxlint": "^1.81.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}
