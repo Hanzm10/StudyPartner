@@ -82,6 +82,9 @@ export interface StudyRepository {
   saveAttempt(attempt: Attempt): void
   deleteAttempt(id: string): void
 
+  /** Replace all quizzes and attempts in one write (backup import). */
+  replaceStudyData(quizzes: Quiz[], attempts: Attempt[]): void
+
   listChatThreads(): ChatThread[]
   getChatThread(id: string): ChatThread | null
   saveChatThread(thread: ChatThread): void

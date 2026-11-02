@@ -136,6 +136,13 @@ export class LocalStorageStudyRepository implements StudyRepository {
     writeStore(store)
   }
 
+  replaceStudyData(quizzes: Quiz[], attempts: Attempt[]): void {
+    const store = readStore()
+    store.quizzes = [...quizzes]
+    store.attempts = [...attempts]
+    writeStore(store)
+  }
+
   listChatThreads(): ChatThread[] {
     return [...readStore().chatThreads]
   }

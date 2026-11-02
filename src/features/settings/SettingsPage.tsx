@@ -1,6 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { studyRepository, type Settings } from '../../data/repository'
 import type { LlmProvider } from '../../llm/types'
+import { TransferPanel } from './TransferPanel'
 import './settings.css'
 
 const PROVIDERS: { value: LlmProvider; label: string }[] = [
@@ -205,6 +206,8 @@ export function SettingsPage() {
           )}
         </div>
       </form>
+
+      <TransferPanel />
     </section>
   )
 }
