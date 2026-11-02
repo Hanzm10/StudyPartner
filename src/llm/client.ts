@@ -17,6 +17,12 @@ export async function streamChat(
   })
 
   if (!response.ok) {
+    // Static hosting (e.g. Vercel) has no /api/chat forwarder.
+    if (response.status === 404 || response.status === 405) {
+      throw new Error(
+        'AI chat is not available on this hosted version. Use Quizzes → Import quiz, or run the app locally with npm run dev.',
+      )
+    }
     let message = `Request failed with status ${response.status}`
     try {
       const data = (await response.json()) as { error?: string }

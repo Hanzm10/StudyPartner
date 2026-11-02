@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check-quiz": "tsx scripts/check-quiz.ts"
   },
   "dependencies": {
     "react": "^19.2.8",
