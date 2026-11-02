@@ -129,3 +129,92 @@
   margin-left: auto;
   color: var(--danger);
 }
+
+.quiz-import {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.quiz-import.is-open {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-glass);
+}
+
+.quiz-import button {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.quiz-import .quiz-import-toggle {
+  align-self: flex-start;
+}
+
+.quiz-import .quiz-import-submit {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.quiz-import button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.quiz-import-label {
+  font-weight: 600;
+}
+
+.quiz-import-help {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.quiz-import textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
+  font-size: 0.82rem;
+  resize: vertical;
+}
+
+.quiz-import-error {
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--danger-border);
+  border-radius: 6px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+}
+
+.quiz-import-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quiz-import-success {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--success);
+}
+
+.quiz-import-success a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

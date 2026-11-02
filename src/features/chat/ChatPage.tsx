@@ -4,8 +4,8 @@ import { MarkdownBody } from '../../components/MarkdownBody'
 import '../../components/markdown.css'
 import { studyRepository, type ChatThread, type Settings } from '../../data/repository'
 import { streamChat } from '../../llm/client'
-import type { Quiz } from '../../domain'
 import type { ChatMessage, LlmProvider } from '../../llm/types'
+import { saveNewQuiz } from '../quizzes/saveQuiz'
 import { QuizPreview } from './QuizPreview'
 import { previewFromLatestAssistant } from './parseQuizFence'
 import { QUIZ_BUILDER_SYSTEM_PROMPT } from './systemPrompt'
@@ -61,27 +61,6 @@ function sortedThreads(): ChatThread[] {
   return studyRepository
     .listChatThreads()
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-}
-
-/**
- * Models often reuse ids like "quiz-1", which would overwrite an older quiz.
- * Reuse a saved quiz only when it is the same content; otherwise mint a new id.
- */
-function saveQuizFromPreview(quiz: Quiz): Quiz {
-  const items = JSON.stringify(quiz.items)
-  const existing = studyRepository
-    .listQuizzes()
-    .find((q) => q.title === quiz.title && JSON.stringify(q.items) === items)
-  if (existing) {
-    return existing
-  }
-  const saved: Quiz = {
-    ...quiz,
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
-  }
-  studyRepository.saveQuiz(saved)
-  return saved
 }
 
 function persistThread(thread: ChatThread): ChatThread {
@@ -276,7 +255,7 @@ export function ChatPage() {
     if (!previewQuiz) {
       return
     }
-    const saved = saveQuizFromPreview(previewQuiz)
+    const saved = saveNewQuiz(previewQuiz)
     navigate(`/quiz/${saved.id}`)
   }
 

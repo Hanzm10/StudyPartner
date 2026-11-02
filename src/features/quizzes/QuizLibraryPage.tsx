@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { studyRepository } from '../../data/repository'
 import type { Attempt } from '../../data/types'
 import type { Quiz } from '../../domain'
+import { ImportQuizPanel } from './ImportQuizPanel'
 import './quiz-library.css'
 
 function formatDate(iso: string): string {
@@ -73,10 +74,12 @@ export function QuizLibraryPage() {
     <section className="quiz-library">
       <h1 className="quiz-library-title">Quiz library</h1>
 
+      <ImportQuizPanel onImported={() => setVersion((v) => v + 1)} />
+
       {quizzes.length === 0 ? (
         <p className="quiz-library-empty">
-          No saved quizzes yet.{' '}
-          <Link to="/chat">Build one in chat</Link>.
+          No saved quizzes yet. <Link to="/chat">Build one in chat</Link> or
+          import one above.
         </p>
       ) : (
         <ul className="quiz-library-list">
