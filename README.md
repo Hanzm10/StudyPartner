@@ -1,32 +1,36 @@
-# React + TypeScript + Vite
+# StudyPartner
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Turn study material into practice quizzes, then drill them until they stick.
 
-Currently, two official plugins are available:
+- **Quiz builder chat**: paste questions, answers, or notes and an AI drafts a quiz (OpenAI, Anthropic, xAI, Gemini, or any OpenAI-compatible endpoint).
+- **Import quiz**: paste a quiz made in another chat; no API key needed.
+- **Quiz types**: multiple choice, true/false, identification, fill in the blank, enumeration.
+- **Practice mode**: see the answer and explanation after each question.
+- **Shuffle questions and choices**, plus keyboard shortcuts.
+- **Results**: score, timing, accuracy by type, "mark correct" overrides, retry missed questions, optional AI study summary.
+- **Light and dark mode.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+All data stays in your browser's localStorage. API keys are only sent to the local forwarder (`/api/chat`), which relays them to the provider.
 
-## React Compiler
+## Run it
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev        # http://localhost:5173
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Or the production build:
+
+```bash
+npm run build
+npm start          # http://localhost:4173
+```
+
+Add an API key in **Settings** to use the chat builder, or skip it and use **Quizzes → Import quiz**.
+
+## Develop
+
+```bash
+npm test
+npm run lint
+```
