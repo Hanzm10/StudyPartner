@@ -1,5 +1,6 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
 import { ThemeToggle } from './components/ThemeToggle'
+import { Toaster } from './components/Toaster'
 import { ChatPage } from './features/chat/ChatPage'
 import { QuizLibraryPage } from './features/quizzes/QuizLibraryPage'
 import { QuizPlayerPage } from './features/quiz/QuizPlayerPage'
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </main>
+      <Toaster />
     </div>
   )
 }

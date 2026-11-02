@@ -244,3 +244,33 @@
   font-size: 0.8rem;
   resize: vertical;
 }
+
+.settings-transfer button,
+.settings-transfer-file span {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.08s ease;
+}
+
+.settings-transfer button:not(:disabled):hover,
+.settings-transfer-file:hover span {
+  border-color: var(--text-subtle);
+}
+
+.settings-transfer button:not(:disabled):active,
+.settings-transfer-file:active span {
+  transform: scale(0.97);
+}
+
+.settings-transfer button.is-flashed,
+.settings-transfer button.is-flashed:not(:disabled):hover,
+.settings-transfer-file span.is-flashed,
+.settings-transfer-file:hover span.is-flashed,
+.settings-transfer .settings-transfer-import.is-flashed {
+  border-color: var(--success);
+  background: var(--success);
+  color: var(--surface);
+  opacity: 1;
+}

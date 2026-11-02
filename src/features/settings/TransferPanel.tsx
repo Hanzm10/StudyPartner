@@ -1,6 +1,17 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent } from 'react'
+import { toast } from '../../components/toast'
 import { buildBackup, mergeBackup, parseBackup, type MergeStats } from '../../data/backup'
 import { studyRepository } from '../../data/repository'
+
+type FlashKey = 'download' | 'copy' | 'share' | 'file' | 'paste'
+
+const FLASH_LABELS: Record<FlashKey, string> = {
+  download: '✓ Downloaded',
+  copy: '✓ Copied',
+  share: '✓ Shared',
+  file: '✓ Imported',
+  paste: '✓ Imported',
+}
 
 function backupFileName(): string {
   return `studypartner-backup-${new Date().toISOString().slice(0, 10)}.json`
@@ -42,7 +53,21 @@ export function TransferPanel() {
     attempts: studyRepository.listAttempts().filter((a) => a.finishedAt).length,
   }))
   const [pasted, setPasted] = useState('')
-  const [status, setStatus] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null)
+  // Which button briefly shows a ✓ label after it did its job.
+  const [flashed, setFlashed] = useState<FlashKey | null>(null)
+  const flashTimer = useRef<number | undefined>(undefined)
+
+  useEffect(() => () => window.clearTimeout(flashTimer.current), [])
+
+  function flash(key: FlashKey) {
+    window.clearTimeout(flashTimer.current)
+    setFlashed(key)
+    flashTimer.current = window.setTimeout(() => setFlashed(null), 2000)
+  }
+
+  function label(key: FlashKey, normal: string): string {
+    return flashed === key ? FLASH_LABELS[key] : normal
+  }
 
   const canShareFiles =
     typeof navigator !== 'undefined' &&
@@ -66,15 +91,17 @@ export function TransferPanel() {
     link.download = backupFileName()
     link.click()
     URL.revokeObjectURL(url)
-    setStatus({ kind: 'ok', text: 'Backup downloaded.' })
+    flash('download')
+    toast(`Backup saved as ${link.download}. Check your Downloads folder.`)
   }
 
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(currentBackupText())
-      setStatus({ kind: 'ok', text: 'Copied. Paste it into the import box on your other device.' })
+      flash('copy')
+      toast('Backup copied. Paste it into the import box on your other device.')
     } catch {
-      setStatus({ kind: 'error', text: 'Could not copy. Use Download backup instead.' })
+      toast('Could not copy. Use Download backup instead.', 'error')
     }
   }
 
@@ -84,15 +111,20 @@ export function TransferPanel() {
     })
     try {
       await navigator.share({ files: [file], title: 'StudyPartner backup' })
-    } catch {
-      // Share sheet dismissed.
+      flash('share')
+      toast('Backup shared.')
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        return
+      }
+      toast('Could not share. Use Download backup instead.', 'error')
     }
   }
 
-  function importText(text: string) {
+  function importText(text: string, source: 'file' | 'paste') {
     const parsed = parseBackup(text)
     if (parsed.status === 'invalid') {
-      setStatus({ kind: 'error', text: parsed.error })
+      toast(parsed.error, 'error')
       return
     }
     const result = mergeBackup(
@@ -105,7 +137,8 @@ export function TransferPanel() {
     }
     setPasted('')
     refreshCounts()
-    setStatus({ kind: 'ok', text: `Imported: ${describeStats(result.stats)}.` })
+    flash(source)
+    toast(`Imported: ${describeStats(result.stats)}.`)
   }
 
   async function handleFile(event: ChangeEvent<HTMLInputElement>) {
@@ -114,7 +147,11 @@ export function TransferPanel() {
     if (!file) {
       return
     }
-    importText(await file.text())
+    try {
+      importText(await file.text(), 'file')
+    } catch {
+      toast(`Could not read ${file.name}.`, 'error')
+    }
   }
 
   return (
@@ -128,15 +165,27 @@ export function TransferPanel() {
       <div className="settings-transfer-group">
         <span className="settings-label">Export</span>
         <div className="settings-transfer-actions">
-          <button type="button" onClick={handleDownload}>
-            Download backup
+          <button
+            type="button"
+            className={flashed === 'download' ? 'is-flashed' : undefined}
+            onClick={handleDownload}
+          >
+            {label('download', 'Download backup')}
           </button>
-          <button type="button" onClick={() => void handleCopy()}>
-            Copy to clipboard
+          <button
+            type="button"
+            className={flashed === 'copy' ? 'is-flashed' : undefined}
+            onClick={() => void handleCopy()}
+          >
+            {label('copy', 'Copy to clipboard')}
           </button>
           {canShareFiles ? (
-            <button type="button" onClick={() => void handleShare()}>
-              Share…
+            <button
+              type="button"
+              className={flashed === 'share' ? 'is-flashed' : undefined}
+              onClick={() => void handleShare()}
+            >
+              {label('share', 'Share…')}
             </button>
           ) : null}
         </div>
@@ -154,15 +203,14 @@ export function TransferPanel() {
             accept=".json,application/json,text/plain"
             onChange={(event) => void handleFile(event)}
           />
-          <span>Choose backup file…</span>
+          <span className={flashed === 'file' ? 'is-flashed' : undefined}>
+            {label('file', 'Choose backup file…')}
+          </span>
         </label>
         <textarea
           aria-label="Paste backup"
           value={pasted}
-          onChange={(event) => {
-            setPasted(event.target.value)
-            setStatus(null)
-          }}
+          onChange={(event) => setPasted(event.target.value)}
           rows={3}
           spellCheck={false}
           placeholder="…or paste a copied backup here"
@@ -170,23 +218,18 @@ export function TransferPanel() {
         <div className="settings-transfer-actions">
           <button
             type="button"
-            className="settings-transfer-import"
+            className={
+              flashed === 'paste'
+                ? 'settings-transfer-import is-flashed'
+                : 'settings-transfer-import'
+            }
             disabled={pasted.trim() === ''}
-            onClick={() => importText(pasted)}
+            onClick={() => importText(pasted, 'paste')}
           >
-            Import pasted backup
+            {label('paste', 'Import pasted backup')}
           </button>
         </div>
       </div>
-
-      {status ? (
-        <p
-          className={status.kind === 'ok' ? 'settings-saved' : 'settings-error'}
-          role={status.kind === 'ok' ? 'status' : 'alert'}
-        >
-          {status.text}
-        </p>
-      ) : null}
     </section>
   )
 }

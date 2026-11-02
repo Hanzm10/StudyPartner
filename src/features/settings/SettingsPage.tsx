@@ -1,6 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { studyRepository, type Settings } from '../../data/repository'
 import type { LlmProvider } from '../../llm/types'
+import { toast } from '../../components/toast'
 import { TransferPanel } from './TransferPanel'
 import './settings.css'
 
@@ -53,6 +54,7 @@ export function SettingsPage() {
     const trimmedBase = baseUrl.trim()
     if (provider === 'custom' && !trimmedBase) {
       setError('Base URL is required for a custom provider.')
+      toast('Base URL is required for a custom provider.', 'error')
       setSaved(false)
       return
     }
@@ -66,6 +68,7 @@ export function SettingsPage() {
 
     studyRepository.saveSettings(settings)
     setSaved(true)
+    toast('Settings saved')
   }
 
   return (
